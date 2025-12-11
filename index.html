@@ -2,282 +2,514 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nyara Stitching Studio</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Hetal Stitching Studio</title>
     
+    <!-- Modern Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
     <style>
         :root {
-            --primary-color: #4CAF50; /* Green */
-            --secondary-color: #2196F3; /* Blue for Save Contact */
-            --text-dark: #333;
-            --text-light: #666;
-            --bg-color: #f4f4f4;
+            /* Pink/Rose Theme */
+            --primary: #D81B60; 
+            --secondary: #FCE4EC; 
+            --gold: #C5A059;
+            --dark: #2c2c2c;
+            --white: #ffffff;
+            --shadow: 0 4px 20px rgba(0,0,0,0.08);
         }
 
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
         body {
-            font-family: 'Roboto', sans-serif;
-            background-color: var(--bg-color);
             margin: 0;
             padding: 0;
+            font-family: 'Poppins', sans-serif;
+            background-color: #fff;
+            color: var(--dark);
+            padding-bottom: 90px;
+        }
+
+        /* --- 1. HEADER WITH LOGO --- */
+        .navbar {
+            background: #ffffff; /* White background to match logo */
+            padding: 10px 20px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
             display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* Logo Styling */
+        .brand-logo {
+            max-height: 40px; /* Adjusts height automatically */
+            width: auto;
+            max-width: 220px; /* Ensures it fits on mobile screens */
+            object-fit: contain;
+        }
+
+        .open-tag {
+            font-size: 11px;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-weight: 600;
+            background: #eee;
+            white-space: nowrap; /* Keeps text on one line */
+        }
+
+        /* --- 2. IMAGE SLIDER --- */
+        .slider-container {
+            position: relative;
+            width: 100%;
+            height: 280px; 
+            overflow: hidden;
+            background: #eee;
+        }
+
+        .slide {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .slide::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(to bottom, transparent 50%, rgba(0,0,0,0.8));
+        }
+
+        .slide.active { opacity: 1; }
+
+        .slider-text {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            color: white;
+            padding: 20px;
+            z-index: 2;
+        }
+        .slider-text h2 { margin: 0; font-size: 22px; font-weight: 600; font-family: 'Poppins', serif;}
+        .slider-text p { margin: 5px 0 0; font-size: 13px; opacity: 0.9; }
+
+        /* --- 3. MAIN CONTAINER --- */
+        .container {
+            padding: 20px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* --- 4. ACTION BUTTONS --- */
+        .action-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 25px;
+            margin-top: -30px; 
+            position: relative;
+            z-index: 10;
+        }
+
+        .action-btn {
+            background: var(--white);
+            border: none;
+            padding: 15px 5px;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            text-align: center;
+            text-decoration: none;
+            color: var(--dark);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-icon {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            color: white;
+        }
+
+        .icon-call { background: linear-gradient(135deg, #ec407a, #d81b60); }
+        .icon-map { background: linear-gradient(135deg, #ab47bc, #8e24aa); }
+        .icon-wa { background: linear-gradient(135deg, #25D366, #128C7E); }
+
+        .btn-label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
+
+        /* --- 5. INFO CARDS --- */
+        .card {
+            background: var(--white);
+            border-radius: 16px;
+            padding: 22px;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            border: 1px solid #f0f0f0;
+        }
+
+        .section-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--primary);
+            font-family: 'Poppins', serif;
+        }
+
+        .info-row {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 18px;
+            align-items: flex-start;
+        }
+        
+        .info-icon { color: var(--gold); font-size: 18px; margin-top: 3px; width: 20px; }
+        .info-text p { margin: 0; font-size: 14px; line-height: 1.5; color: #555; }
+        .info-text strong { color: var(--dark); display: block; margin-bottom: 2px; font-size: 15px; }
+
+        .google-map-btn {
+            display: block;
+            width: 100%;
+            background: white;
+            border: 1px solid var(--primary);
+            color: var(--primary);
+            padding: 12px;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: 600;
+            font-size: 13px;
+            margin-top: 10px;
+            text-decoration: none;
+            letter-spacing: 0.5px;
+        }
+
+        /* --- 6. GALLERY --- */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+
+        .gallery-item {
+            position: relative;
+            padding-bottom: 120%;
+            border-radius: 8px;
+            overflow: hidden;
+            background: #eee;
+            cursor: pointer;
+            display: block;
+        }
+        
+        .gallery-item.hidden {
+            display: none;
+        }
+
+        .gallery-item img {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+
+        #viewMoreBtn {
+            width: 100%;
+            padding: 12px;
+            margin-top: 15px;
+            background: #f5f5f5;
+            border: none;
+            color: #555;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        /* --- 7. BOTTOM FLOATING BAR --- */
+        .bottom-bar {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            max-width: 500px;
+            background: var(--primary);
+            color: white;
+            padding: 14px 25px;
+            border-radius: 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 10px 25px rgba(216, 27, 96, 0.4);
+            z-index: 1000;
+            cursor: pointer;
+        }
+        .save-text { font-size: 14px; font-weight: 600; }
+        .save-icon { background: rgba(255,255,255,0.2); width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+
+        /* --- 8. LIGHTBOX MODAL --- */
+        .modal {
+            display: none; 
+            position: fixed; 
+            z-index: 2000; 
+            left: 0; top: 0;
+            width: 100%; height: 100%; 
+            background-color: rgba(0,0,0,0.95); 
+            flex-direction: column;
+            align-items: center;
             justify-content: center;
         }
 
-        .card {
-            background: white;
-            width: 100%;
-            max-width: 480px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-            min-height: 100vh;
-            padding-bottom: 20px;
+        .modal-content {
+            max-width: 100%;
+            max-height: 80vh;
+            object-fit: contain;
         }
 
-        /* Header */
-        .header {
-            background-color: var(--primary-color);
+        .close-modal {
+            position: absolute;
+            top: 20px; right: 20px;
             color: white;
-            padding: 30px 20px;
-        }
-
-        .header h1 {
-            margin: 0;
-            font-size: 24px;
-            font-weight: 700;
-        }
-
-        .header p {
-            margin: 10px 0 0;
-            font-size: 14px;
-            opacity: 0.9;
-            line-height: 1.4;
-        }
-
-        /* Sections */
-        .section {
-            padding: 20px;
-            border-bottom: 1px solid #eee;
-            display: flex;
-            gap: 15px;
-        }
-
-        .icon-col {
-            width: 30px;
-            text-align: center;
-            padding-top: 5px;
-        }
-
-        .icon-col i {
-            color: #888;
-            font-size: 20px;
-        }
-
-        .content-col {
-            flex: 1;
-        }
-
-        h3 {
-            margin: 0 0 5px;
-            font-size: 14px;
-            color: var(--text-light);
-            font-weight: 500;
-            text-transform: uppercase;
-        }
-
-        p {
-            margin: 0;
-            color: var(--text-dark);
-            font-size: 15px;
-            line-height: 1.5;
-        }
-
-        .status {
-            color: var(--primary-color);
-            font-size: 13px;
-            font-weight: 500;
-            margin-top: 5px;
-            display: block;
-        }
-
-        /* Map Style */
-        .map-container {
-            margin-top: 15px;
-            width: 100%;
-            height: 200px;
-            background-color: #eee;
-            border-radius: 8px;
-            overflow: hidden;
-        }
-
-        .map-container iframe {
-            width: 100%;
-            height: 100%;
-            border: 0;
-        }
-
-        /* Contact Styling */
-        .contact-name {
-            font-weight: 700;
-            font-size: 18px;
-            margin-bottom: 2px;
-            display: block;
-        }
-
-        .contact-label {
-            display: block;
-            font-size: 12px;
-            color: #999;
-            margin-bottom: 15px;
-        }
-
-        .contact-row {
-            margin-bottom: 10px;
-        }
-        
-        a { text-decoration: none; }
-
-        /* Buttons */
-        .btn {
-            display: block;
-            text-align: center;
-            padding: 12px;
-            border-radius: 5px;
-            margin-top: 10px;
-            font-weight: bold;
+            font-size: 30px;
             cursor: pointer;
-            transition: opacity 0.3s;
+            z-index: 2002;
+            padding: 10px;
         }
-        .btn:hover { opacity: 0.9; }
 
-        .whatsapp-btn {
-            background-color: #25D366;
+        .prev, .next {
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            width: auto;
+            padding: 16px;
+            margin-top: -50px;
             color: white;
+            font-weight: bold;
+            font-size: 24px;
+            user-select: none;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            transition: 0.3s;
         }
-
-        .save-btn {
-            background-color: var(--secondary-color);
-            color: white;
-        }
-
-        /* Footer */
-        .footer {
+        .prev { left: 15px; }
+        .next { right: 15px; }
+        .prev:hover, .next:hover { background: rgba(255, 255, 255, 0.3); }
+        .coptright-text {
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+            font-size: 14px;
+            line-height: 1.42857143;    
+            color: #ccc;
             text-align: center;
-            padding: 20px;
-            font-size: 12px;
-            color: #777;
-            background: #f9f9f9;
         }
     </style>
 </head>
 <body>
 
-    <div class="card">
-        <!-- Header -->
-        <div class="header">
-            <h1>Nyara Stitching Studio</h1>
-            <p>Specialized in designing and stitching Ladies' Dresses for weddings, festivals, and casual wear.</p>
-        </div>
+    <!-- HEADER WITH LOGO -->
+    <div class="navbar">
+        <!-- Make sure you upload your logo as 'logo.jpg' or change this link -->
+        <img src="assets/images/logo.png" alt="Hetal Stitching Studio" class="brand-logo">
+        <div id="status-badge" class="open-tag">Loading...</div>
+    </div>
 
-        <!-- Opening Hours -->
-        <div class="section">
-            <div class="icon-col"><i class="far fa-clock"></i></div>
-            <div class="content-col">
-                <h3>Opening Hours</h3>
-                <p>Mon - Sat</p>
-                <p>9:00 am - 8:00 pm</p>
-                <span id="open-status" class="status">Open Now</span>
-            </div>
-        </div>
-
-        <!-- Location with Google Map -->
-        <div class="section">
-            <div class="icon-col"><i class="fas fa-map-marker-alt"></i></div>
-            <div class="content-col">
-                <h3>Location</h3>
-                <p>
-                    Vibhag-2, B-171, Aananddhara Society, <br>
-                    near Ram Chowk, Mota Varachha<br>
-                    Surat, Gujarat 394101
-                </p>
-                
-                <!-- Google Map Embedded -->
-                <div class="map-container">
-                    <iframe 
-                        src="https://maps.google.com/maps?q=Vibhag-2%2C%20B-171%2C%20Aananddhara%20Society%2C%20near%20Ram%20Chowk%2C%20Mota%20Varachha%2C%20Surat&t=&z=15&ie=UTF8&iwloc=&output=embed" 
-                        allowfullscreen="" loading="lazy">
-                    </iframe>
-                </div>
-                
-                <a href="https://www.google.com/maps/search/?api=1&query=Mota+Varachha+Surat+Aananddhara+Society" target="_blank" style="display:inline-block; margin-top:10px; color:#4CAF50; font-weight:bold; font-size:14px;">
-                    OPEN IN GOOGLE MAPS APP
-                </a>
-            </div>
-        </div>
-
-        <!-- Contact Section -->
-        <div class="section">
-            <div class="icon-col"><i class="fas fa-address-book"></i></div>
-            <div class="content-col">
-                <h3>Contact Details</h3>
-                
-                <span class="contact-name">Hetal Nakrani</span>
-                <span class="contact-label">Owner - Nyara Stitching Studio</span>
-
-                <div class="contact-row">
-                    <i class="fas fa-phone-alt" style="color:#888; margin-right:8px; font-size:14px;"></i>
-                    <a href="tel:+919274819335" style="color:#333; font-size:16px;">9274819335</a>
-                </div>
-
-                <div class="contact-row">
-                    <i class="fas fa-envelope" style="color:#888; margin-right:8px; font-size:14px;"></i>
-                    <a href="mailto:rfretails@gmail.com" style="color:#333;">rfretails@gmail.com</a>
-                </div>
-
-                <!-- SAVE CONTACT BUTTON -->
-                <div onclick="saveContact()" class="btn save-btn">
-                    <i class="fas fa-user-plus"></i> &nbsp; Save Contact
-                </div>
-
-                <!-- WHATSAPP BUTTON -->
-                <a href="https://wa.me/919274819335?text=Hi,%20I%20want%20to%20know%20more%20about%20stitching%20services" class="btn whatsapp-btn">
-                    <i class="fab fa-whatsapp"></i> &nbsp; Chat on WhatsApp
-                </a>
-            </div>
-        </div>
+    <!-- TOP SLIDER -->
+    <div class="slider-container">
+        <!-- Slide 1 -->
+        <div class="slide active" style="background-image: url('assets/images/slider1.png');"></div>
+        <!-- Slide 2 -->
+        <div class="slide" style="background-image: url('assets/images/slider2.avif');"></div>
+        <!-- Slide 3 -->
+        <div class="slide" style="background-image: url('assets/images/slider3.avif');"></div>
+        <!-- Slide 4 -->
+        <div class="slide" style="background-image: url('assets/images/slider4.jpg');"></div>
+        <!-- Slide 5 -->
+        <div class="slide" style="background-image: url('assets/images/slider5.avif');"></div>
         
-        <div class="footer">
-            &copy; 2024 Nyara Stitching Studio
+        <div class="slider-text">
+            <h2>Perfect Fit for You</h2>
+            <p>Ladies Suits • Dresses • Custom Stitching</p>
         </div>
     </div>
 
-    <!-- JavaScript Functionality -->
+    <div class="container">
+        
+        <!-- BUTTONS -->
+        <div class="action-grid">
+            <a href="tel:+919274819335" class="action-btn">
+                <div class="btn-icon icon-call"><i class="fas fa-phone"></i></div>
+                <div class="btn-label">Call</div>
+            </a>
+            <a href="https://www.google.com/maps/dir/?api=1&destination=Vibhag-2+B-171+Aananddhara+Society+Surat" target="_blank" class="action-btn">
+                <div class="btn-icon icon-map"><i class="fas fa-location-arrow"></i></div>
+                <div class="btn-label">Map</div>
+            </a>
+            <a href="https://wa.me/919274819335?text=Hello,%20I%20want%20to%20know%20about%20stitching%20prices" class="action-btn">
+                <div class="btn-icon icon-wa"><i class="fab fa-whatsapp"></i></div>
+                <div class="btn-label">Chat</div>
+            </a>
+        </div>
+
+        <!-- DETAILS -->
+        <div class="card">
+            <div class="section-title"><i class="fas fa-cut"></i> Studio Details</div>
+            
+            <div class="info-row">
+                <div class="info-icon"><i class="fas fa-user-circle"></i></div>
+                <div class="info-text">
+                    <strong>Hetal Nakrani</strong>
+                    <p>Professional Tailor & Designer</p>
+                </div>
+            </div>
+
+            <div class="info-row">
+                <div class="info-icon"><i class="far fa-clock"></i></div>
+                <div class="info-text">
+                    <strong>Opening Hours</strong>
+                    <p>Mon - Sat: 9:00 AM - 8:00 PM</p>
+                    <p style="font-size:12px; color:#D81B60;">Sunday Closed</p>
+                </div>
+            </div>
+
+            <div class="info-row">
+                <div class="info-icon"><i class="fas fa-map-marker-alt"></i></div>
+                <div class="info-text">
+                    <strong>Address</strong>
+                    <p>B-171, Vibhag-2, Aananddhara Society,<br>near Ram Chowk, Mota Varachha<br>Surat, Gujarat</p>
+                </div>
+            </div>
+
+            <a href="https://maps.app.goo.gl/CYpMoF32BcZXvAFt8" class="google-map-btn">
+                <i class="fas fa-map-marked-alt"></i> OPEN GOOGLE MAP
+            </a>
+        </div>
+
+        <!-- GALLERY -->
+        <div class="card">
+            <div class="section-title"><i class="fas fa-images"></i> Latest Designs</div>
+            <p style="font-size:12px; color:#777; margin-top:-10px; margin-bottom:15px;">Tap on photo to zoom</p>
+            
+            <div class="gallery-grid" id="galleryGrid">
+                <!-- IMPORTANT: Replace the links below with your own dress photos -->
+                <div class="gallery-item"><img src="https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=500&q=80" alt="Dress 1"></div>
+                <div class="gallery-item"><img src="https://images.unsplash.com/photo-1583391733958-c7757943c224?w=500&q=80" alt="Dress 2"></div>
+                <div class="gallery-item"><img src="https://images.unsplash.com/photo-1566174053879-31528523f8ae?w=500&q=80" alt="Dress 3"></div>
+                <div class="gallery-item"><img src="https://images.unsplash.com/photo-1550614000-4b9519e0034a?w=500&q=80" alt="Dress 4"></div>
+                
+                <!-- HIDDEN IMAGES -->
+                <div class="gallery-item hidden"><img src="https://images.unsplash.com/photo-1605256585681-455837661b18?w=500&q=80" alt="Dress 5"></div>
+                <div class="gallery-item hidden"><img src="https://images.unsplash.com/photo-1512413914633-b5043f4041ea?w=500&q=80" alt="Dress 6"></div>
+                <div class="gallery-item hidden"><img src="https://images.unsplash.com/photo-1496747611176-843222e1e57c?w=500&q=80" alt="Dress 7"></div>
+                <div class="gallery-item hidden"><img src="https://images.unsplash.com/photo-1534126511673-b6899657816a?w=500&q=80" alt="Dress 8"></div>
+            </div>
+
+            <button id="viewMoreBtn" onclick="showMoreImages()">View More Designs <i class="fas fa-chevron-down"></i></button>
+        </div>
+        <div class="coptright-text">Copyright © Hetal Stitching Studio 2025</div>
+    </div>
+
+    <!-- SAVE CONTACT BUTTON -->
+    <div class="bottom-bar" onclick="saveContact()">
+        <div class="save-text">Save Contact</div>
+        <div class="save-icon"><i class="fas fa-user-plus"></i></div>
+    </div>
+
+    <!-- LIGHTBOX MODAL -->
+    <div id="imageModal" class="modal">
+        <span class="close-modal" onclick="closeModal()">&times;</span>
+        <a class="prev" onclick="changeModalImage(-1)">&#10094;</a>
+        <a class="next" onclick="changeModalImage(1)">&#10095;</a>
+        <img class="modal-content" id="modalImg">
+    </div>
+
     <script>
-        // 1. Time Status Logic
+        // SLIDER
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        function changeSlide() {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (currentSlide + 1) % slides.length;
+            slides[currentSlide].classList.add('active');
+        }
+        setInterval(changeSlide, 3500);
+
+        // OPEN/CLOSED LOGIC
         const now = new Date();
         const hour = now.getHours();
-        const day = now.getDay(); 
-        const statusElement = document.getElementById('open-status');
-        
+        const day = now.getDay();
+        const badge = document.getElementById('status-badge');
         if (day === 0) {
-            statusElement.innerText = "Closed (Sunday)";
-            statusElement.style.color = "red";
+            badge.innerText = "Closed";
+            badge.style.color = "red";
         } else if (hour >= 9 && hour < 20) {
-            statusElement.innerText = "Open Now";
-            statusElement.style.color = "#4CAF50";
+            badge.innerText = "Open Now";
+            badge.style.color = "#D81B60";
         } else {
-            statusElement.innerText = "Closed Now";
-            statusElement.style.color = "red";
+            badge.innerText = "Closed";
+            badge.style.color = "red";
         }
 
-        // 2. Save Contact Function (Creates a vCard file)
+        // VIEW MORE
+        function showMoreImages() {
+            const hiddenItems = document.querySelectorAll('.gallery-item.hidden');
+            hiddenItems.forEach(item => { item.style.display = 'block'; });
+            document.getElementById('viewMoreBtn').style.display = 'none';
+        }
+
+        // GALLERY LIGHTBOX
+        const modal = document.getElementById("imageModal");
+        const modalImg = document.getElementById("modalImg");
+        let allImages = []; 
+        let currentImageIndex = 0;
+
+        function initGallery() {
+            const imgs = document.querySelectorAll('.gallery-item img');
+            allImages = Array.from(imgs);
+            allImages.forEach((img, index) => {
+                img.addEventListener('click', function() {
+                    openModal(index);
+                });
+            });
+        }
+        function openModal(index) {
+            modal.style.display = "flex";
+            currentImageIndex = index;
+            modalImg.src = allImages[index].src;
+        }
+        function closeModal() {
+            modal.style.display = "none";
+        }
+        function changeModalImage(direction) {
+            currentImageIndex += direction;
+            if (currentImageIndex >= allImages.length) currentImageIndex = 0;
+            else if (currentImageIndex < 0) currentImageIndex = allImages.length - 1;
+            modalImg.src = allImages[currentImageIndex].src;
+        }
+        initGallery();
+
+        // SAVE CONTACT
         function saveContact() {
-            // Data for the contact card
             var vCardData = [
                 'BEGIN:VCARD',
                 'VERSION:3.0',
                 'FN:Hetal Nakrani',
-                'ORG:Nyara Stitching Studio',
+                'ORG:Hetal Stitching Studio',
                 'TITLE:Owner',
                 'TEL;TYPE=CELL,VOICE:+919274819335',
                 'EMAIL:rfretails@gmail.com',
@@ -285,13 +517,11 @@
                 'URL;TYPE=WORK:' + window.location.href,
                 'END:VCARD'
             ].join('\n');
-
-            // Create a hidden download link
             var blob = new Blob([vCardData], { type: 'text/vcard' });
             var url = URL.createObjectURL(blob);
             var a = document.createElement('a');
             a.href = url;
-            a.download = 'Nyara_Stitching_Contact.vcf';
+            a.download = 'Hetal_Stitching_Studio.vcf';
             document.body.appendChild(a);
             a.click();
             document.body.removeChild(a);
