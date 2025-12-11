@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nyara Stitching Studio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary-color: #4CAF50; /* Green */
+            --secondary-color: #2196F3; /* Blue for Save Contact */
+            --text-dark: #333;
+            --text-light: #666;
+            --bg-color: #f4f4f4;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--bg-color);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        .card {
+            background: white;
+            width: 100%;
+            max-width: 480px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            min-height: 100vh;
+            padding-bottom: 20px;
+        }
+
+        /* Header */
+        .header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 30px 20px;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        .header p {
+            margin: 10px 0 0;
+            font-size: 14px;
+            opacity: 0.9;
+            line-height: 1.4;
+        }
+
+        /* Sections */
+        .section {
+            padding: 20px;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            gap: 15px;
+        }
+
+        .icon-col {
+            width: 30px;
+            text-align: center;
+            padding-top: 5px;
+        }
+
+        .icon-col i {
+            color: #888;
+            font-size: 20px;
+        }
+
+        .content-col {
+            flex: 1;
+        }
+
+        h3 {
+            margin: 0 0 5px;
+            font-size: 14px;
+            color: var(--text-light);
+            font-weight: 500;
+            text-transform: uppercase;
+        }
+
+        p {
+            margin: 0;
+            color: var(--text-dark);
+            font-size: 15px;
+            line-height: 1.5;
+        }
+
+        .status {
+            color: var(--primary-color);
+            font-size: 13px;
+            font-weight: 500;
+            margin-top: 5px;
+            display: block;
+        }
+
+        /* Map Style */
+        .map-container {
+            margin-top: 15px;
+            width: 100%;
+            height: 200px;
+            background-color: #eee;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        /* Contact Styling */
+        .contact-name {
+            font-weight: 700;
+            font-size: 18px;
+            margin-bottom: 2px;
+            display: block;
+        }
+
+        .contact-label {
+            display: block;
+            font-size: 12px;
+            color: #999;
+            margin-bottom: 15px;
+        }
+
+        .contact-row {
+            margin-bottom: 10px;
+        }
+        
+        a { text-decoration: none; }
+
+        /* Buttons */
+        .btn {
+            display: block;
+            text-align: center;
+            padding: 12px;
+            border-radius: 5px;
+            margin-top: 10px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: opacity 0.3s;
+        }
+        .btn:hover { opacity: 0.9; }
+
+        .whatsapp-btn {
+            background-color: #25D366;
+            color: white;
+        }
+
+        .save-btn {
+            background-color: var(--secondary-color);
+            color: white;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 20px;
+            font-size: 12px;
+            color: #777;
+            background: #f9f9f9;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <!-- Header -->
+        <div class="header">
+            <h1>Nyara Stitching Studio</h1>
+            <p>Specialized in designing and stitching Ladies' Dresses for weddings, festivals, and casual wear.</p>
+        </div>
+
+        <!-- Opening Hours -->
+        <div class="section">
+            <div class="icon-col"><i class="far fa-clock"></i></div>
+            <div class="content-col">
+                <h3>Opening Hours</h3>
+                <p>Mon - Sat</p>
+                <p>9:00 am - 8:00 pm</p>
+                <span id="open-status" class="status">Open Now</span>
+            </div>
+        </div>
+
+        <!-- Location with Google Map -->
+        <div class="section">
+            <div class="icon-col"><i class="fas fa-map-marker-alt"></i></div>
+            <div class="content-col">
+                <h3>Location</h3>
+                <p>
+                    Vibhag-2, B-171, Aananddhara Society, <br>
+                    near Ram Chowk, Mota Varachha<br>
+                    Surat, Gujarat 394101
+                </p>
+                
+                <!-- Google Map Embedded -->
+                <div class="map-container">
+                    <iframe 
+                        src="https://maps.google.com/maps?q=Vibhag-2%2C%20B-171%2C%20Aananddhara%20Society%2C%20near%20Ram%20Chowk%2C%20Mota%20Varachha%2C%20Surat&t=&z=15&ie=UTF8&iwloc=&output=embed" 
+                        allowfullscreen="" loading="lazy">
+                    </iframe>
+                </div>
+                
+                <a href="https://www.google.com/maps/search/?api=1&query=Mota+Varachha+Surat+Aananddhara+Society" target="_blank" style="display:inline-block; margin-top:10px; color:#4CAF50; font-weight:bold; font-size:14px;">
+                    OPEN IN GOOGLE MAPS APP
+                </a>
+            </div>
+        </div>
+
+        <!-- Contact Section -->
+        <div class="section">
+            <div class="icon-col"><i class="fas fa-address-book"></i></div>
+            <div class="content-col">
+                <h3>Contact Details</h3>
+                
+                <span class="contact-name">Hetal Nakrani</span>
+                <span class="contact-label">Owner - Nyara Stitching Studio</span>
+
+                <div class="contact-row">
+                    <i class="fas fa-phone-alt" style="color:#888; margin-right:8px; font-size:14px;"></i>
+                    <a href="tel:+919274819335" style="color:#333; font-size:16px;">9274819335</a>
+                </div>
+
+                <div class="contact-row">
+                    <i class="fas fa-envelope" style="color:#888; margin-right:8px; font-size:14px;"></i>
+                    <a href="mailto:rfretails@gmail.com" style="color:#333;">rfretails@gmail.com</a>
+                </div>
+
+                <!-- SAVE CONTACT BUTTON -->
+                <div onclick="saveContact()" class="btn save-btn">
+                    <i class="fas fa-user-plus"></i> &nbsp; Save Contact
+                </div>
+
+                <!-- WHATSAPP BUTTON -->
+                <a href="https://wa.me/919274819335?text=Hi,%20I%20want%20to%20know%20more%20about%20stitching%20services" class="btn whatsapp-btn">
+                    <i class="fab fa-whatsapp"></i> &nbsp; Chat on WhatsApp
+                </a>
+            </div>
+        </div>
+        
+        <div class="footer">
+            &copy; 2024 Nyara Stitching Studio
+        </div>
+    </div>
+
+    <!-- JavaScript Functionality -->
+    <script>
+        // 1. Time Status Logic
+        const now = new Date();
+        const hour = now.getHours();
+        const day = now.getDay(); 
+        const statusElement = document.getElementById('open-status');
+        
+        if (day === 0) {
+            statusElement.innerText = "Closed (Sunday)";
+            statusElement.style.color = "red";
+        } else if (hour >= 9 && hour < 20) {
+            statusElement.innerText = "Open Now";
+            statusElement.style.color = "#4CAF50";
+        } else {
+            statusElement.innerText = "Closed Now";
+            statusElement.style.color = "red";
+        }
+
+        // 2. Save Contact Function (Creates a vCard file)
+        function saveContact() {
+            // Data for the contact card
+            var vCardData = [
+                'BEGIN:VCARD',
+                'VERSION:3.0',
+                'FN:Hetal Nakrani',
+                'ORG:Nyara Stitching Studio',
+                'TITLE:Owner',
+                'TEL;TYPE=CELL,VOICE:+919274819335',
+                'EMAIL:rfretails@gmail.com',
+                'ADR;TYPE=WORK:;;Vibhag-2 B-171 Aananddhara Society;Surat;Gujarat;394101;India',
+                'URL;TYPE=WORK:' + window.location.href,
+                'END:VCARD'
+            ].join('\n');
+
+            // Create a hidden download link
+            var blob = new Blob([vCardData], { type: 'text/vcard' });
+            var url = URL.createObjectURL(blob);
+            var a = document.createElement('a');
+            a.href = url;
+            a.download = 'Nyara_Stitching_Contact.vcf';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+        }
+    </script>
+</body>
+</html>
